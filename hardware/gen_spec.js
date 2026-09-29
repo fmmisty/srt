@@ -71,7 +71,7 @@ const doc=new Document({
     ["アナログ入出力","2ch バランス XLR、+4dBu nominal、+20dBu max（±15V電源、実力~+22dBu）"],
     ["AES/EBU","1系統 2ch、XLR 110Ω、トランス絶縁、AES3-1992"],
     ["サンプリング周波数","48kHz／96kHz"],
-    ["ビット深度","24bit（無圧縮LPCMを24bitで通す場合はソフト対応）"],
+    ["ビット深度","A/D・D/A・AESは24bit処理。SRT伝送は16bit（S16LE）"],
     ["レベル設計","0dBFS ≒ +22dBu（+4dBu = −18dBFS、ヘッドルーム約18dB）"],
     ["A/D・D/A","PCM1862（ADC）／PCM5242（DAC）／THAT1646（出力ドライバ）"],
   ]),
@@ -135,7 +135,6 @@ const doc=new Document({
   b("Wi-Fi外部アンテナの要否・実装"),
   b("量産構成（Raspberry Pi 4 ボード or CM4化）"),
   b("確定BOM・詳細回路図・質量・EMC/安全規格対応"),
-  b("無圧縮LPCMの24bit伝送対応（ソフト小改修の要否）"),
   gap(),
   p("― 以上（本書は案。回路・BOM確定後に正式版へ改訂）―",{align:AlignmentType.CENTER}),
  ]}]
