@@ -5,10 +5,11 @@
 
 ## 0. 構成の確定(2026-09)
 
-- **Pi 内蔵**：本機の中に Raspberry Pi 4 を収め、内部USBでフロントエンドと接続。→ **背面に LAN(RJ-45) を追加**、**+5V(Pi)レール必須**、Wi-Fi(Pi内蔵、金属筐体なら外部アンテナ)。
+- **Pi 内蔵**：本機の中に Raspberry Pi 4 を収め、内部USBでフロントエンドと接続。→ **背面に LAN(RJ-45) を追加**、**+5V(Pi)レール必須**。
+- **Wi-Fi = 外付けUSB無線子機＋背面パネルアンテナで確定**：金属筐体でPi内蔵アンテナは届かないため、**技適済み・Linux対応・外部アンテナ端子付きのUSB Wi-Fiドングル**を内部USBに接続し、**背面にRP-SMAパネルアンテナ**を出す。Pi内蔵Wi-Fiは無効化。
 - **全二重(双方向)**：内蔵Piで `srt_send`(自局音声→SRT送出) と `srt_recv`(SRT受信→自局音声出力) を**同時起動**。フロントエンドはADC/AES-in(入力)とDAC/AES-out(出力)を両方持つので、**1台で送りも受けも同時**にできる。2台を向き合わせれば双方向通話。
 - **操作**：コーデック切替は携帯WEB(`codec_web.py`)、SRT ON/OFF・latency も同様(自社版=ライセンス無し)。
-- 背面I/O(更新): AC IN │ **LAN** │ USB-C(保守) │ AES IN/OUT │ ANALOG IN/OUT L/R （＋Wi-Fiアンテナ）　※**REMOTE/GPIOは無し(不採用)**
+- 背面I/O(更新): AC IN │ **LAN** │ USB-C(保守) │ AES IN/OUT │ ANALOG IN/OUT L/R │ **Wi-Fiアンテナ(RP-SMA・USB子機用)**　※**REMOTE/GPIOは無し(不採用)**
 
 ---
 
@@ -95,6 +96,8 @@ AC-IN(100–240V) → 内部AC-DCモジュール → 各レールを生成。
 | 出力ドライバ | THAT1646 | THAT | DRV134, SSM2142 |
 | 入力レシーバ | THAT1246 | THAT | INA1620, SSM2143 |
 | AES送受+ASRC | **SRC4392** | TI | AK4113+AK4104(+AK4137) |
+| Wi-Fi子機 | USB無線LANドングル(外部アンテナ端子付・技適済) | RTL8811/8812 or MT7612U系 | 内部USB接続、背面RP-SMAへ延長 |
+| Wi-Fiアンテナ | RP-SMA パネルマウント + 内部同軸(RP-SMA↔子機) | — | 2.4/5GHz対応品 |
 | クロック | Si5351/XO 24.576&22.5792 | SiLabs等 | 低ジッタXO×2 |
 | 前面OLED | SSD1306(I2C) | — | — |
 | AESトランス | 110Ω AES3 pulse xfmr | Pulse/ScientificConv | — |
@@ -109,7 +112,7 @@ AC-IN(100–240V) → 内部AC-DCモジュール → 各レールを生成。
 3. **REMOTE/GPIOの主体**: Pi GPIO(内蔵Piなので素直) / XMOS。→ Pi GPIO 推奨。
 4. ~~出力ヘッドルーム~~ → **±15V で確定**(差動~+21〜22dBu、+20dBu max確保)。
 5. ~~ビット深度~~ → **ハード24bitで確定**(ADC/DAC/AES/UAC2)。**SRT伝送は16bit(S16LE)で確定**(無圧縮LPCMの24bit伝送対応=なし)。AAC/Opusは知覚符号化ゆえ24→16で恩恵ほぼ無、aptXは内部24bit処理。
-6. **Wi-Fiアンテナ**: 金属筐体なので u.FL→SMA 外部アンテナ推奨(携帯到達性)。
+6. ~~Wi-Fiアンテナ~~ → **外付けUSB Wi-Fiドングル＋背面RP-SMAパネルアンテナで確定**。技適済み・Linux(Pi)ドライバ対応・外部アンテナ端子付きの子機を選定(例: RTL8811/8812系 or MT7612U系、2.4GHz確実重視なら8188系でも可)。Pi内蔵Wi-Fiは無効化。
 7. **放熱/筐体**: 冷却=**ヒートシンク＋静音ファン or 通気**(SoC<70℃目標)。**密閉可否は未定**(現時点)。温度ログ常設推奨。**量産時はCM4化**で熱・実装を有利に(検討)。
 8. ~~ビット深度~~→**24bit確定**(§5)。REMOTE→**無し**。
 
