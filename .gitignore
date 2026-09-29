@@ -1,0 +1,18 @@
+# ビルド生成物(拡張子なしの実行ファイル)
+srt_send
+srt_recv
+udp2srt
+srt2udp
+hdip_srt_bridge
+audio_srt_send
+audio_srt_recv
+aac_srt_send
+aac_srt_recv
+toneutil
+srt_keygen
+udp_proxy
+*.o
+# 同梱ライブラリのgit
+libfreeaptx/.git/
+# 一時
+*.raw
