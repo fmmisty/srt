@@ -25,7 +25,7 @@ const doc=new Document({
   new Paragraph({children:[new PageBreak()]}),
 
   h("1. 概要",HeadingLevel.HEADING_1),
-  p("本製品は、バランスアナログおよびAES/EBUの音声を、SRT（Secure Reliable Transport）で一般IP回線（フレッツ光・VPN・専用線・インターネット等）を通じて双方向伝送する、1UラックマウントのIP音声コーデックである。USBオーディオ・フロントエンド（UAC2準拠）とRaspberry Pi 4を内蔵し、1台で送受信が完結する。コーデックの切り替え・遅延設定はスマートフォンのブラウザから行える。"),
+  p("本製品は、バランスアナログおよびAES/EBUの音声を、SRT（Secure Reliable Transport）で一般IP回線（フレッツ光・VPN・専用線・インターネット等）を通じて双方向伝送する、1UラックマウントのIP音声コーデックである。USBオーディオ・フロントエンド（UAC2準拠）とRaspberry Pi CM4を内蔵し、1台で送受信が完結する。コーデックの切り替え・遅延設定はスマートフォンのブラウザから行える。"),
   p("SRTの誤り訂正（ARQ再送）と受信バッファにより、ベストエフォート回線でもパケットロス・ジッタに強い伝送を実現する。バランスアナログ＋AES/EBU＋ドライバ不要USB音声を1台に統合したRaspberry Piベースの製品は市場に存在せず、本製品がその用途を埋める。"),
   gap(),
   h("1.1 特長",HeadingLevel.HEADING_2),
@@ -33,7 +33,7 @@ const doc=new Document({
   b("SRTによる誤り訂正・ジッタ吸収で途切れにくい伝送（latency可変）"),
   b("5コーデック（LPCM／aptX／aptX HD／AAC／Opus）を、スマホのWEBから無停止で切替。受信側は自動追従"),
   b("全二重（送受信同時）。2台を対向させて双方向伝送"),
-  b("Raspberry Pi 4 内蔵・1U完結。LAN／Wi-Fi対応"),
+  b("Raspberry Pi CM4 内蔵・1U完結。GbE LAN／Wi-Fi対応"),
 
   h("2. システム構成",HeadingLevel.HEADING_1),
   p("拠点Aと拠点Bに本製品を各1台設置し、SRTで結ぶ。各機は内蔵Piで送信(srt_send)と受信(srt_recv)を同時実行する。"),
@@ -55,13 +55,13 @@ const doc=new Document({
   tbl([3000,5700],[
     ["コネクタ","内容"],
     ["AC IN","AC100–240V 50/60Hz（内部電源）"],
-    ["LAN","RJ-45 10/100/1000。SRT伝送＋WEB操作"],
+    ["LAN","RJ-45 GbE（CM4）。SRT伝送＋WEB操作"],
     ["USB-C","保守用（設定・更新・コンソール）"],
     ["AES/EBU IN","XLR-F、110Ω、AES3-1992、2ch"],
     ["AES/EBU OUT","XLR-M、110Ω、AES3-1992、2ch"],
     ["ANALOG IN L/R","XLR-F、バランス、+4dBu nominal／+20dBu max"],
     ["ANALOG OUT L/R","XLR-M、バランス、+4dBu nominal／+20dBu max"],
-    ["Wi-Fi RF窓","樹脂カバー（レドーム）内側に内蔵アンテナ。スマホからの操作用（外付けUSB無線子機）"],
+    ["Wi-Fi RF窓","樹脂カバー（レドーム）内側に内蔵アンテナ（CM4内蔵無線＋u.FL）。スマホからの操作用"],
     ["REMOTE/GPIO","無し（本製品では非搭載）"],
   ]),
 
@@ -100,7 +100,7 @@ const doc=new Document({
 
   h("8. ネットワーク・操作",HeadingLevel.HEADING_1),
   b("LAN(RJ-45)：SRT伝送および設定WEB"),
-  b("Wi-Fi：外付けUSB無線子機＋パネルRF窓（樹脂カバー）内蔵アンテナ経由。スマートフォンからコーデック切替・状態確認（codec_web）"),
+  b("Wi-Fi：CM4内蔵無線＋u.FL→パネルRF窓（樹脂カバー）内蔵アンテナ経由。スマートフォンからコーデック切替・状態確認（codec_web）"),
   b("USB-C：保守用"),
   b("操作アプリ：内蔵WEB（ブラウザのみ、専用アプリ不要）"),
 
@@ -111,8 +111,8 @@ const doc=new Document({
     ["ADC / DAC","TI PCM1862 / PCM5242"],
     ["出力ラインドライバ","THAT1646（入力レシーバ THAT1246）"],
     ["AES/EBU 送受＋ASRC","TI SRC4392（RX＋TX＋デュアルASRC）"],
-    ["内蔵コンピュータ","Raspberry Pi 4（2GB。量産時はCM4を検討）"],
-    ["Wi-Fi","外付けUSB無線子機（技適済）＋パネルRF窓（樹脂カバー）内蔵アンテナ"],
+    ["内蔵コンピュータ","Raspberry Pi CM4（WiFi/eMMC/2GB、キャリア基板に実装。試作はPi4B可）"],
+    ["Wi-Fi","CM4内蔵無線＋u.FL→パネルRF窓（樹脂カバー）内蔵アンテナ"],
     ["クロック","24.576MHz／22.5792MHz（低ジッタ）"],
   ]),
 
@@ -132,8 +132,8 @@ const doc=new Document({
   b("（自社利用版のためライセンス機能なし）"),
 
   h("12. 備考（設計確定前の暫定・未確定事項）",HeadingLevel.HEADING_1),
-  b("量産構成（Raspberry Pi 4 ボード or CM4化）"),
-  b("確定BOM・詳細回路図・質量・EMC/安全規格対応"),
+  b("CM4キャリア詳細回路図・確定BOM（型番/員数）"),
+  b("機構（1U筐体・パネル・RF窓）・質量・EMC/安全規格対応"),
   gap(),
   p("― 以上（本書は案。回路・BOM確定後に正式版へ改訂）―",{align:AlignmentType.CENTER}),
  ]}]

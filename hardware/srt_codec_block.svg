@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="'Yu Gothic','Meiryo',sans-serif">
   <rect x="0" y="0" width="1280" height="800" fill="#ffffff"/>
-  <text x="640" y="34" font-size="23" font-weight="bold" text-anchor="middle" fill="#1f4e79">RFD SRT音声コーデック (1U・Raspberry Pi 4 内蔵) 内部構成図</text>
+  <text x="640" y="34" font-size="23" font-weight="bold" text-anchor="middle" fill="#1f4e79">RFD SRT音声コーデック (1U・Raspberry Pi CM4 内蔵) 内部構成図</text>
   <text x="640" y="58" font-size="13" text-anchor="middle" fill="#666">バランスアナログ＋AES/EBU / UAC2(ドライバ不要) / 携帯WEBでコーデック無停止切替 / 全二重(送受同時)</text>
 
   <!-- 背面I/O -->
@@ -46,16 +46,16 @@
 
   <!-- Raspberry Pi 内蔵 -->
   <rect x="742" y="86" width="380" height="470" rx="10" fill="#eaf7ee" stroke="#2e8b57" stroke-width="2"/>
-  <text x="932" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e6b3f">Raspberry Pi 4 (内蔵・2GB・Wi-Fi)</text>
+  <text x="932" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e6b3f">Raspberry Pi CM4 (内蔵・eMMC/2GB・WiFi)</text>
   <g font-size="12.5" fill="#111">
     <rect x="762" y="126" width="340" height="60" rx="6" fill="#fff" stroke="#2e8b57"/>
       <text x="774" y="148">srt_send + srt_recv (全二重)</text>
       <text x="774" y="168" font-size="11" fill="#555">5コーデック / 無停止切替 / SRT ARQ・latency</text>
     <rect x="762" y="194" width="340" height="40" rx="6" fill="#fff" stroke="#2e8b57"/><text x="774" y="219">codec_web.py (携帯WEB: 選択+現在表示)</text>
     <rect x="762" y="242" width="340" height="34" rx="6" fill="#fff" stroke="#2e8b57"/><text x="774" y="264">ALSA (arecord / aplay ・ UAC2 4ch)</text>
-    <rect x="762" y="296" width="165" height="40" rx="6" fill="#fff" stroke="#2e8b57"/><text x="774" y="321">Ethernet → LAN</text>
-    <rect x="937" y="296" width="165" height="40" rx="6" fill="#fff" stroke="#2e8b57"/><text x="949" y="315" font-size="11">USB Wi-Fi子機</text><text x="949" y="330" font-size="11">→ RF窓 →スマホ</text>
-    <rect x="762" y="346" width="340" height="34" rx="6" fill="#fff" stroke="#2e8b57"/><text x="774" y="368">USB(内部) ← フロントエンドの音声(4ch)</text>
+    <rect x="762" y="296" width="165" height="40" rx="6" fill="#fff" stroke="#2e8b57"/><text x="774" y="321">GbE → LAN</text>
+    <rect x="937" y="296" width="165" height="40" rx="6" fill="#fff" stroke="#2e8b57"/><text x="949" y="315" font-size="11">CM4内蔵WiFi</text><text x="949" y="330" font-size="11">u.FL→RF窓→スマホ</text>
+    <rect x="762" y="346" width="340" height="34" rx="6" fill="#fff" stroke="#2e8b57"/><text x="774" y="368">USB2.0 ← フロントエンド(XU316)の音声(4ch)</text>
     <rect x="762" y="392" width="340" height="30" rx="6" fill="#eef7f0" stroke="#2e8b57"/><text x="774" y="412" font-size="11" fill="#555">冷却: 非密閉/前面吸気→背面静音ファン・SoCヒートシンク筐体結合・温度PWM</text>
   </g>
 
@@ -88,5 +88,5 @@
     <path d="M214 412 H472 V566"/>   <!-- AC IN -> PSU -->
   </g>
 
-  <text x="640" y="762" font-size="11.5" text-anchor="middle" fill="#888">確定: Pi内蔵/全二重 ・ AES=SRC4392(ASRC) ・ ±15V(+4dBu) ・ 24bit処理/SRT伝送S16 ・ Wi-Fi=USB子機+RF窓(樹脂カバー) ・ 冷却=非密閉/背面静音ファン ・ REMOTE無し ｜ 未定: 量産構成(Pi4B or CM4)</text>
+  <text x="640" y="762" font-size="11.5" text-anchor="middle" fill="#888">確定: Pi内蔵/全二重 ・ AES=SRC4392(ASRC) ・ ±15V(+4dBu) ・ 24bit処理/SRT伝送S16 ・ Wi-Fi=CM4内蔵+u.FL+RF窓 ・ 冷却=非密閉/背面静音ファン ・ REMOTE無し ｜ 残: CM4キャリア詳細回路図・確定BOM・機構</text>
 </svg>
