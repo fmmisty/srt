@@ -56,7 +56,7 @@
     <rect x="762" y="296" width="165" height="40" rx="6" fill="#fff" stroke="#2e8b57"/><text x="774" y="321">Ethernet → LAN</text>
     <rect x="937" y="296" width="165" height="40" rx="6" fill="#fff" stroke="#2e8b57"/><text x="949" y="315" font-size="11">USB Wi-Fi子機</text><text x="949" y="330" font-size="11">→ RF窓 →スマホ</text>
     <rect x="762" y="346" width="340" height="34" rx="6" fill="#fff" stroke="#2e8b57"/><text x="774" y="368">USB(内部) ← フロントエンドの音声(4ch)</text>
-    <rect x="762" y="392" width="340" height="30" rx="6" fill="#eef7f0" stroke="#2e8b57"/><text x="774" y="412" font-size="11" fill="#555">冷却: ヒートシンク＋静音ファン/通気(密閉可否は未定)</text>
+    <rect x="762" y="392" width="340" height="30" rx="6" fill="#eef7f0" stroke="#2e8b57"/><text x="774" y="412" font-size="11" fill="#555">冷却: 非密閉/前面吸気→背面静音ファン・SoCヒートシンク筐体結合・温度PWM</text>
   </g>
 
   <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#333"/></marker></defs>
@@ -88,5 +88,5 @@
     <path d="M214 412 H472 V566"/>   <!-- AC IN -> PSU -->
   </g>
 
-  <text x="640" y="762" font-size="11.5" text-anchor="middle" fill="#888">確定: Pi内蔵/全二重 ・ AES=SRC4392(ASRC) ・ ±15V(+4dBu) ・ 24bit処理/SRT伝送S16 ・ Wi-Fi=USB子機+RF窓(樹脂カバー) ・ REMOTE無し ｜ 未定: 密閉可否・冷却詳細(量産はCM4検討)</text>
+  <text x="640" y="762" font-size="11.5" text-anchor="middle" fill="#888">確定: Pi内蔵/全二重 ・ AES=SRC4392(ASRC) ・ ±15V(+4dBu) ・ 24bit処理/SRT伝送S16 ・ Wi-Fi=USB子機+RF窓(樹脂カバー) ・ 冷却=非密閉/背面静音ファン ・ REMOTE無し ｜ 未定: 量産構成(Pi4B or CM4)</text>
 </svg>
