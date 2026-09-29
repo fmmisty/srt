@@ -111,7 +111,7 @@ const doc=new Document({
     ["ADC / DAC","TI PCM1862 / PCM5242"],
     ["出力ラインドライバ","THAT1646（入力レシーバ THAT1246）"],
     ["AES/EBU 送受＋ASRC","TI SRC4392（RX＋TX＋デュアルASRC）"],
-    ["内蔵コンピュータ","Raspberry Pi CM4（WiFi/eMMC/2GB、キャリア基板に実装。試作はPi4B可）"],
+    ["内蔵コンピュータ","Raspberry Pi CM4102008（Wireless/2GB/8GB eMMC、キャリア基板に実装。試作はPi4B可）"],
     ["Wi-Fi","CM4内蔵無線＋u.FL→パネルRF窓（樹脂カバー）内蔵アンテナ"],
     ["クロック","24.576MHz／22.5792MHz（低ジッタ）"],
   ]),
