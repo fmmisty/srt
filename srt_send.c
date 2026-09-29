@@ -139,13 +139,13 @@ static int build_config(unsigned char *config_msg, const codec_t *codec, int sam
 int main(int argc, char **argv) {
     if (argc < 2) {
         fprintf(stderr,
-            "使い方: %s <listen_port> [--codec=aac|aptx|aptxhd|opus|lpcm] [--samplerate=48000]\n"
+            "使い方: %s <listen_port> [--codec=opus|aac|aptx|aptxhd|lpcm] (既定opus) [--samplerate=48000]\n"
             "        [--channels=2] [--bitrate=96000] [--latency=150] [--passphrase=xxx]\n"
             "        [--udp-in=<port>] [--codec-file=<path>] [--status-file=<path>]\n", argv[0]);
         return 1;
     }
     int port = atoi(argv[1]);
-    const char *codec_name = "aac";
+    const char *codec_name = "opus";   /* 既定=Opus(通常) */
     int samplerate = 48000, channels = 2, bitrate = 96000, latency_ms = 150;
     const char *passphrase = NULL;
     int udp_in_port = 0;

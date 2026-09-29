@@ -8,8 +8,8 @@ PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
 SEL  = sys.argv[2] if len(sys.argv) > 2 else "/tmp/codec.sel"
 STAT = sys.argv[3] if len(sys.argv) > 3 else "/tmp/status.json"
 
-CODECS = [("lpcm","LPCM (無圧縮)"),("aptxhd","aptX HD"),("aptx","aptX"),
-          ("aac","AAC"),("opus","Opus")]
+CODECS = [("opus","Opus (通常)"),("aac","AAC"),("aptxhd","aptX HD"),
+          ("aptx","aptX"),("lpcm","LPCM (無圧縮)")]
 VALID = {c for c,_ in CODECS}
 
 PAGE = """<!doctype html><html lang=ja><head><meta charset=utf-8>
