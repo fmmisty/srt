@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 980" font-family="'Yu Gothic','Meiryo',sans-serif">
+  <rect x="0" y="0" width="1440" height="980" fill="#ffffff"/>
+  <text x="720" y="32" font-size="22" font-weight="bold" text-anchor="middle" fill="#1f4e79">RFD SRT音声コーデック ― CM4キャリア基板 概略回路図</text>
+  <text x="720" y="54" font-size="12.5" text-anchor="middle" fill="#666">ブロック結線＋主要バス(I2S/MCLK/I2C/SPDIF/USB)・電源レール。詳細ピンは schematic_notes.md 参照</text>
+
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#333"/></marker>
+    <marker id="ag" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2e8b57"/></marker>
+    <marker id="ao" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker>
+  </defs>
+
+  <!-- ===== 左: アナログ/AES フロントエンド ===== -->
+  <text x="30" y="86" font-size="13" font-weight="bold" fill="#8a6d0b">アナログ / AES フロントエンド</text>
+
+  <!-- ANALOG IN -->
+  <rect x="24" y="96" width="120" height="46" rx="6" fill="#fff" stroke="#888"/><text x="34" y="116" font-size="12">ANALOG IN</text><text x="34" y="132" font-size="10.5" fill="#666">L/R XLR-F(バランス)</text>
+  <rect x="168" y="96" width="120" height="46" rx="6" fill="#fff" stroke="#b7950b"/><text x="178" y="114" font-size="11.5">入力レシーバ+LPF</text><text x="178" y="131" font-size="10.5" fill="#666">THAT1246 (±15V)</text>
+  <rect x="312" y="96" width="120" height="46" rx="6" fill="#fff" stroke="#b7950b"/><text x="322" y="114" font-size="11.5">ADC 2ch</text><text x="322" y="131" font-size="10.5" fill="#666">PCM1862 24bit</text>
+
+  <!-- ANALOG OUT -->
+  <rect x="24" y="164" width="120" height="46" rx="6" fill="#fff" stroke="#888"/><text x="34" y="184" font-size="12">ANALOG OUT</text><text x="34" y="200" font-size="10.5" fill="#666">L/R XLR-M(バランス)</text>
+  <rect x="168" y="164" width="120" height="46" rx="6" fill="#fff" stroke="#b7950b"/><text x="178" y="182" font-size="11.5">出力ドライバ</text><text x="178" y="199" font-size="10.5" fill="#666">THAT1646 (±15V)</text>
+  <rect x="312" y="164" width="120" height="46" rx="6" fill="#fff" stroke="#b7950b"/><text x="322" y="182" font-size="11.5">DAC 2ch</text><text x="322" y="199" font-size="10.5" fill="#666">PCM5242 24bit</text>
+
+  <!-- AES -->
+  <rect x="24" y="238" width="120" height="46" rx="6" fill="#fff" stroke="#888"/><text x="34" y="258" font-size="12">AES/EBU IN</text><text x="34" y="274" font-size="10.5" fill="#666">XLR-F 110Ω</text>
+  <rect x="24" y="300" width="120" height="46" rx="6" fill="#fff" stroke="#888"/><text x="34" y="320" font-size="12">AES/EBU OUT</text><text x="34" y="336" font-size="10.5" fill="#666">XLR-M 110Ω</text>
+  <rect x="168" y="252" width="120" height="80" rx="6" fill="#fff" stroke="#b7950b"/><text x="178" y="272" font-size="11">110Ω パルス</text><text x="178" y="288" font-size="11">トランス</text><text x="178" y="308" font-size="10.5" fill="#666">IN/OUT 絶縁</text>
+  <rect x="312" y="238" width="120" height="108" rx="6" fill="#fff5f5" stroke="#c0392b"/><text x="322" y="258" font-size="11.5">AES 送受+ASRC</text><text x="322" y="276" font-size="11" fill="#c0392b">SRC4392</text><text x="322" y="296" font-size="10.5" fill="#666">RX/TX</text><text x="322" y="312" font-size="10.5" fill="#666">デュアルASRC</text><text x="322" y="330" font-size="10.5" fill="#666">外部AES同期吸収</text>
+
+  <!-- analog signal arrows -->
+  <g stroke="#333" stroke-width="1.6" fill="none" marker-end="url(#a)">
+    <path d="M144 119 H168"/><path d="M288 119 H312"/>
+    <path d="M312 187 H288"/><path d="M168 187 H144"/>
+    <path d="M144 261 H168"/><path d="M288 278 H312"/>
+    <path d="M312 322 H288"/><path d="M168 316 H144"/>
+  </g>
+
+  <!-- ===== 中央: XU316 + クロック ===== -->
+  <rect x="470" y="96" width="230" height="300" rx="10" fill="#fff8e1" stroke="#b7950b" stroke-width="2"/>
+  <text x="585" y="120" font-size="14" font-weight="bold" text-anchor="middle" fill="#8a6d0b">XMOS XU316</text>
+  <text x="585" y="138" font-size="11" text-anchor="middle" fill="#444">UAC2 / USB2.0 デバイス</text>
+  <text x="585" y="156" font-size="11" text-anchor="middle" fill="#444">4in / 4out</text>
+  <g font-size="10.5" fill="#333">
+    <text x="482" y="184">I2S0 → PCM1862(ADC)</text>
+    <text x="482" y="204">I2S1 → PCM5242(DAC)</text>
+    <text x="482" y="224">SPDIF/I2S ↔ SRC4392(AES)</text>
+    <text x="482" y="244">I2C master(制御)</text>
+    <text x="482" y="264">MCLK 入力</text>
+    <text x="482" y="284">GPIO → OLED/LED</text>
+  </g>
+  <text x="585" y="316" font-size="10.5" text-anchor="middle" fill="#888">VDDcore +0.9V / IO +3.3V</text>
+  <text x="585" y="336" font-size="10.5" text-anchor="middle" fill="#888">USB DP/DM → CM4</text>
+  <text x="585" y="372" font-size="11" text-anchor="middle" fill="#111" font-weight="bold">ドライバ不要でCM4認識</text>
+
+  <!-- Clock -->
+  <rect x="470" y="416" width="230" height="66" rx="8" fill="#fff" stroke="#b7950b"/>
+  <text x="585" y="438" font-size="12" font-weight="bold" text-anchor="middle" fill="#8a6d0b">クロック(低ジッタ)</text>
+  <text x="585" y="457" font-size="10.5" text-anchor="middle" fill="#444">XO 24.576MHz / 22.5792MHz</text>
+  <text x="585" y="473" font-size="10.5" text-anchor="middle" fill="#666">MCLK→XU316/ADC/DAC/SRC4392, 別LDO</text>
+
+  <!-- buses front-end <-> XU316 -->
+  <g stroke="#333" stroke-width="1.6" fill="none">
+    <path d="M432 119 H470" marker-end="url(#a)"/>
+    <path d="M432 187 H452 V204 H470" marker-end="url(#a)"/>
+  </g>
+  <path d="M432 292 H452 V224 H470" stroke="#c0392b" stroke-width="1.6" fill="none" marker-end="url(#ao)"/>
+  <text x="448" y="114" font-size="9.5" fill="#333">I2S</text>
+  <text x="448" y="199" font-size="9.5" fill="#333">I2S</text>
+  <text x="448" y="238" font-size="9.5" fill="#c0392b">SPDIF/I2S</text>
+  <!-- I2C bus to all converters -->
+  <path d="M470 244 H452 V360 H150 V352" stroke="#1f4e79" stroke-width="1.4" fill="none" stroke-dasharray="4"/>
+  <text x="300" y="374" font-size="10" fill="#1f4e79">I2C (SDA/SCL): PCM1862 / PCM5242 / SRC4392 / OLED</text>
+  <!-- MCLK -->
+  <path d="M585 416 V400" stroke="#333" stroke-width="1.4" fill="none"/>
+  <path d="M470 264 H456 V405 H700 V405" stroke="#7a5c00" stroke-width="1.2" fill="none" stroke-dasharray="2"/>
+  <text x="712" y="408" font-size="9.5" fill="#7a5c00">MCLK</text>
+
+  <!-- ===== 右: CM4 ===== -->
+  <rect x="770" y="96" width="330" height="300" rx="10" fill="#eaf7ee" stroke="#2e8b57" stroke-width="2"/>
+  <text x="935" y="120" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e6b3f">Raspberry Pi CM4 (WiFi/eMMC/2GB)</text>
+  <g font-size="11" fill="#111">
+    <rect x="784" y="134" width="302" height="30" rx="5" fill="#fff" stroke="#2e8b57"/><text x="794" y="154">USB2.0 ← XU316 (音声4ch, DP/DM)</text>
+    <rect x="784" y="170" width="302" height="30" rx="5" fill="#fff" stroke="#2e8b57"/><text x="794" y="190">GbE(RGMII内蔵PHY) → 磁気部品 → RJ-45</text>
+    <rect x="784" y="206" width="302" height="30" rx="5" fill="#fff" stroke="#2e8b57"/><text x="794" y="226">WiFi 内蔵 → u.FL → RF窓 内蔵アンテナ</text>
+    <rect x="784" y="242" width="302" height="30" rx="5" fill="#fff" stroke="#2e8b57"/><text x="794" y="262">USB-OTG → USB-C(保守/eMMC書込 rpiboot)</text>
+    <rect x="784" y="278" width="146" height="46" rx="5" fill="#fff" stroke="#2e8b57"/><text x="794" y="296">GPIO: FAN PWM</text><text x="794" y="313" font-size="10" fill="#666">温度連動(vcgencmd)</text>
+    <rect x="940" y="278" width="146" height="46" rx="5" fill="#fff" stroke="#2e8b57"/><text x="950" y="296">UART: 保守コンソール</text><text x="950" y="313" font-size="10" fill="#666">(任意, ヘッダ)</text>
+    <rect x="784" y="332" width="302" height="30" rx="5" fill="#eef7f0" stroke="#2e8b57"/><text x="794" y="352" font-size="10.5" fill="#555">srt_send / srt_recv / codec_web (全二重)</text>
+  </g>
+  <text x="935" y="382" font-size="10.5" text-anchor="middle" fill="#888">+5V 給電 (5V/3A以上) ・ eMMC起動(SD不要)</text>
+
+  <!-- XU316 <-> CM4 USB -->
+  <path d="M700 336 H740 V149 H784" stroke="#333" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <text x="742" y="150" font-size="10" font-weight="bold" fill="#333">USB2.0</text>
+
+  <!-- ===== 右端: 背面コネクタ ===== -->
+  <text x="1140" y="86" font-size="13" font-weight="bold" fill="#1f4e79">背面 I/O</text>
+  <g font-size="11" fill="#111">
+    <rect x="1120" y="170" width="150" height="28" rx="5" fill="#e8f4ea" stroke="#2e8b57"/><text x="1130" y="188">LAN RJ-45 (GbE)</text>
+    <rect x="1120" y="206" width="150" height="28" rx="5" fill="#e8f4ea" stroke="#2e8b57"/><text x="1130" y="224">Wi-Fi RF窓(樹脂)</text>
+    <rect x="1120" y="242" width="150" height="28" rx="5" fill="#fff" stroke="#888"/><text x="1130" y="260">USB-C (保守)</text>
+    <rect x="1120" y="96" width="150" height="28" rx="5" fill="#fff" stroke="#888"/><text x="1130" y="114">ANALOG IN L/R</text>
+    <rect x="1120" y="132" width="150" height="28" rx="5" fill="#fff" stroke="#888"/><text x="1130" y="150">ANALOG OUT L/R</text>
+    <rect x="1120" y="292" width="150" height="28" rx="5" fill="#fff" stroke="#888"/><text x="1130" y="310">AES IN / OUT</text>
+    <rect x="1120" y="328" width="150" height="28" rx="5" fill="#fff" stroke="#888"/><text x="1130" y="346">AC IN 100-240V</text>
+    <rect x="1120" y="600" width="150" height="26" rx="5" fill="#f7f7f7" stroke="#bbb"/><text x="1130" y="618" fill="#999">REMOTE/GPIO 無し</text>
+  </g>
+  <g stroke="#2e8b57" stroke-width="1.4" fill="none" marker-end="url(#ag)">
+    <path d="M1086 185 H1120"/>
+    <path d="M1086 220 H1120"/>
+  </g>
+  <path d="M1086 257 H1120" stroke="#333" stroke-width="1.4" fill="none" marker-end="url(#a)"/>
+
+  <!-- 前面表示 -->
+  <rect x="470" y="512" width="230" height="70" rx="8" fill="#fff" stroke="#b7950b"/>
+  <text x="585" y="534" font-size="12" font-weight="bold" text-anchor="middle" fill="#8a6d0b">前面 表示</text>
+  <text x="585" y="553" font-size="10.5" text-anchor="middle" fill="#444">OLED(SSD1306 I2C) + LED</text>
+  <text x="585" y="569" font-size="10.5" text-anchor="middle" fill="#666">USB LINK / AES LOCK / SIG / CLIP / dBFS</text>
+
+  <!-- ===== 電源ツリー ===== -->
+  <rect x="24" y="640" width="1246" height="150" rx="10" fill="#f5f5f5" stroke="#666"/>
+  <text x="647" y="664" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">電源ツリー (AC-DC 25〜35W級)</text>
+  <rect x="44" y="678" width="150" height="44" rx="6" fill="#fff" stroke="#666"/><text x="54" y="698" font-size="11">AC IN 100-240V</text><text x="54" y="715" font-size="10" fill="#666">→ AC-DCモジュール</text>
+  <g font-size="10.5" fill="#111">
+    <rect x="230" y="672" width="170" height="30" rx="5" fill="#fff" stroke="#2e8b57"/><text x="240" y="692">+5V/3A↑ → CM4</text>
+    <rect x="230" y="708" width="170" height="30" rx="5" fill="#fff" stroke="#666"/><text x="240" y="728">+3.3V(デジタル) XU316 IO</text>
+    <rect x="230" y="744" width="170" height="30" rx="5" fill="#fff" stroke="#666"/><text x="240" y="764">+0.9V XU316 VDDcore</text>
+    <rect x="420" y="672" width="200" height="30" rx="5" fill="#fff" stroke="#1f4e79"/><text x="430" y="692">アナログ+3.3V(クリーンLDO)</text>
+    <rect x="420" y="708" width="200" height="30" rx="5" fill="#fff" stroke="#c0392b"/><text x="430" y="728">±15V(DC-DC+LDO) THAT段</text>
+    <rect x="420" y="744" width="200" height="30" rx="5" fill="#fff" stroke="#666"/><text x="430" y="764">クロック用 別LDO(ジッタ低減)</text>
+  </g>
+  <g font-size="10.5" fill="#333">
+    <text x="646" y="690">レベル: 公称+4dBu / 0dBFS≒+22dBu(≒18dBヘッドルーム) / 24bit処理・SRT伝送S16</text>
+    <text x="646" y="712">接地: /PE分離・シャーシGND(御社 電源基板方式)。アナログGND/デジタルGNDは1点(スター)接続</text>
+    <text x="646" y="734">冷却: 非密閉/前面吸気→背面 静音ファン(CM4 GPIO PWM・温度連動)・SoCヒートシンク筐体結合・ダストフィルタ</text>
+    <text x="646" y="756" fill="#666">FAN: +5V(or +12V)駆動、PWM=CM4 GPIO、フェイルセーフ=フル回転。温度は vcgencmd で常時ログ</text>
+  </g>
+  <g stroke="#333" stroke-width="1.4" fill="none" marker-end="url(#a)">
+    <path d="M194 700 H230"/><path d="M194 700 H210 V723 H230"/><path d="M194 700 H210 V759 H230"/>
+  </g>
+
+  <text x="720" y="820" font-size="11.5" text-anchor="middle" fill="#888">確定方式: CM4内蔵/全二重・AES=SRC4392(ASRC)・±15V(+4dBu)・24bit(伝送S16)・WiFi=CM4内蔵+u.FL+RF窓・冷却=非密閉+静音ファン・REMOTE無し</text>
+  <text x="720" y="840" font-size="11" text-anchor="middle" fill="#999">概略レベル。次段: 詳細ピン割当(schematic_notes.md)→ 回路図(KiCad)→ 確定BOM(型番/員数)→ 基板/機構</text>
+</svg>
