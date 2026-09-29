@@ -61,7 +61,7 @@ const doc=new Document({
     ["AES/EBU OUT","XLR-M、110Ω、AES3-1992、2ch"],
     ["ANALOG IN L/R","XLR-F、バランス、+4dBu nominal／+20dBu max"],
     ["ANALOG OUT L/R","XLR-M、バランス、+4dBu nominal／+20dBu max"],
-    ["Wi-Fiアンテナ","RP-SMA（外付けUSB無線子機用）。スマホからの操作用"],
+    ["Wi-Fi RF窓","樹脂カバー（レドーム）内側に内蔵アンテナ。スマホからの操作用（外付けUSB無線子機）"],
     ["REMOTE/GPIO","無し（本製品では非搭載）"],
   ]),
 
@@ -100,7 +100,7 @@ const doc=new Document({
 
   h("8. ネットワーク・操作",HeadingLevel.HEADING_1),
   b("LAN(RJ-45)：SRT伝送および設定WEB"),
-  b("Wi-Fi：外付けUSB無線子機＋背面RP-SMAアンテナ経由。スマートフォンからコーデック切替・状態確認（codec_web）"),
+  b("Wi-Fi：外付けUSB無線子機＋パネルRF窓（樹脂カバー）内蔵アンテナ経由。スマートフォンからコーデック切替・状態確認（codec_web）"),
   b("USB-C：保守用"),
   b("操作アプリ：内蔵WEB（ブラウザのみ、専用アプリ不要）"),
 
@@ -112,7 +112,7 @@ const doc=new Document({
     ["出力ラインドライバ","THAT1646（入力レシーバ THAT1246）"],
     ["AES/EBU 送受＋ASRC","TI SRC4392（RX＋TX＋デュアルASRC）"],
     ["内蔵コンピュータ","Raspberry Pi 4（2GB。量産時はCM4を検討）"],
-    ["Wi-Fi","外付けUSB無線子機（技適済・外部アンテナ端子付）＋背面RP-SMAパネルアンテナ"],
+    ["Wi-Fi","外付けUSB無線子機（技適済）＋パネルRF窓（樹脂カバー）内蔵アンテナ"],
     ["クロック","24.576MHz／22.5792MHz（低ジッタ）"],
   ]),
 
